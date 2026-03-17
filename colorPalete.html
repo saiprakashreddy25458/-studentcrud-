@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Color Palette Lab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            text-align: center;
+            padding: 40px;
+            color: white;
+        }
+
+        #lab-container {
+            background: white;
+            color: black;
+            padding: 30px;
+            border-radius: 15px;
+            width: 400px;
+            margin: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .swatch {
+            width: 70px;
+            height: 70px;
+            display: inline-block;
+            margin: 10px;
+            transition: 0.4s;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .round-btn { background: #4CAF50; color: white; }
+        .border-btn { background: #2196F3; color: white; }
+        .reset-trigger { background: #f44336; color: white; }
+    </style>
+</head>
+<body>
+
+    <div id="lab-container">
+        <h2 id="main-title">Color Palette Lab</h2>
+
+        <div class="swatch" style="background:red;"></div>
+        <div class="swatch" style="background:blue;"></div>
+        <div class="swatch" style="background:green;"></div>
+
+        <br>
+
+        <button class="round-btn">Round Corners</button>
+        <button class="border-btn">Add Border</button>
+        <button class="reset-trigger">Reset All</button>
+    </div>
+
+    <script>
+        const title = document.getElementById('main-title');
+        const swatches = document.getElementsByClassName('swatch');
+        const btns = document.getElementsByTagName('button');
+        const resetBtn = document.querySelector('.reset-trigger');
+        const allSwatches = document.querySelectorAll('#lab-container .swatch');
+
+        btns[0].onclick = () => {
+            for(let s of swatches) s.style.borderRadius = "50%";
+            title.innerText = "Rounded Palette";
+        };
+
+        btns[1].onclick = () => {
+            for(let s of swatches) s.style.border = "4px solid black";
+        };
+
+        resetBtn.onclick = () => {
+            allSwatches.forEach(s => {
+                s.style.borderRadius = "0";
+                s.style.border = "none";
+            });
+            title.innerText = "Color Palette Lab";
+        };
+    </script>
+
+</body>
+</html>

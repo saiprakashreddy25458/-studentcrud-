@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Match Score Tracker</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(135deg,#1e3c72,#2a5298,#ff512f);
+  background-size:300% 300%;
+  animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* Glass Card */
+.scoreboard{
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(20px);
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  color:white;
+  box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  width:350px;
+}
+
+.scoreboard h2{
+  margin-bottom:25px;
+  font-size:24px;
+  letter-spacing:1px;
+}
+
+/* Score Display */
+.score-display{
+  font-size:3rem;
+  font-weight:bold;
+  margin-bottom:30px;
+  transition:0.3s;
+}
+
+/* Buttons */
+button{
+  padding:12px 18px;
+  margin:8px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+/* Team Buttons */
+.home-btn{
+  background:linear-gradient(45deg,#00c6ff,#0072ff);
+  color:white;
+}
+.away-btn{
+  background:linear-gradient(45deg,#ff512f,#dd2476);
+  color:white;
+}
+.reset-btn{
+  background:linear-gradient(45deg,#434343,#000000);
+  color:white;
+}
+
+button:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+<body>
+
+<div class="scoreboard">
+  <h2>⚽ Live Match Score</h2>
+
+  <div class="score-display">
+    <span id="home-display">0</span> :
+    <span id="away-display">0</span>
+  </div>
+
+  <button class="home-btn" onclick="scoreGoal('home')">Home Goal</button>
+  <button class="away-btn" onclick="scoreGoal('away')">Away Goal</button>
+  <br>
+  <button class="reset-btn" onclick="resetMatch()">Reset Match</button>
+</div>
+
+<script>
+let homeScore = 0;
+let awayScore = 0;
+
+const homeEl = document.getElementById('home-display');
+const awayEl = document.getElementById('away-display');
+
+function scoreGoal(team){
+  if(team === 'home'){
+    homeScore++;
+    homeEl.textContent = homeScore;
+  } else {
+    awayScore++;
+    awayEl.textContent = awayScore;
+  }
+
+  animateScore();
+}
+
+function resetMatch(){
+  homeScore = 0;
+  awayScore = 0;
+  homeEl.textContent = 0;
+  awayEl.textContent = 0;
+}
+
+/* Small animation when score updates */
+function animateScore(){
+  document.querySelector('.score-display').style.transform="scale(1.2)";
+  setTimeout(()=>{
+    document.querySelector('.score-display').style.transform="scale(1)";
+  },150);
+}
+</script>
+
+</body>
+</html>

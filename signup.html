@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+form {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 300px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+
+<form aria-labelledby="signup-heading" onsubmit="return validateForm()">
+
+  <h2 id="signup-heading">Create Account</h2>
+
+  <label for="fullname">Full Name</label>
+  <input type="text" id="fullname" name="fullname"
+         required aria-required="true"
+         aria-label="Enter your full name">
+
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email"
+         required aria-required="true"
+         aria-label="Enter your email address">
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password"
+         required aria-required="true"
+         minlength="8"
+         aria-label="Enter your password">
+
+  <label for="confirm">Confirm Password</label>
+  <input type="password" id="confirm" name="confirm_password"
+         required aria-required="true"
+         aria-label="Confirm your password">
+
+  <button type="submit">Sign Up</button>
+</form>
+<p style="text-align:center; margin-top:10px;">
+Already have an account?
+<a href="signin.html">Sign In</a>
+</p>
+
+<p style="text-align:center;">
+Want to register for Tantraz?
+<a href="tantraz-registration.html">Tantraz Registration</a>
+</p>
+
+</body>
+<script>
+function validateForm() {
+
+  var password = document.getElementById("password").value;
+  var confirmPassword = document.getElementById("confirm").value;
+
+  // Check if passwords match
+  if (password !== confirmPassword) {
+    alert("Passwords do not match!");
+    return false; // Stop form submission
+  }
+
+  // If passwords match
+  alert("Registration Successful! Redirecting to Sign In...");
+
+  // Redirect after 2 seconds
+  setTimeout(function() {
+    window.location.href = "signin.html";
+  }, 2000);
+
+  return false; // Prevent actual form submission
+}
+</script>
+
+

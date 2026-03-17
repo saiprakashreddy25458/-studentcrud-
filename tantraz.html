@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tantraz Onboarding</title>
+
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg,#141e30,#243b55);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  padding:20px;
+}
+
+/* Glass Card */
+.container{
+  width:100%;
+  max-width:1000px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  border-radius:20px;
+  box-shadow:0 30px 60px rgba(0,0,0,0.4);
+  display:flex;
+  overflow:hidden;
+  color:white;
+}
+
+/* Left Branding */
+.left{
+  flex:1;
+  padding:60px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.left h1{
+  font-size:38px;
+  margin-bottom:20px;
+}
+
+.left p{
+  opacity:0.8;
+  line-height:1.6;
+}
+
+/* Right Form Area */
+.right{
+  flex:1;
+  background:white;
+  color:#333;
+  padding:50px;
+  position:relative;
+}
+
+/* Progress Bar */
+.progress{
+  height:5px;
+  width:100%;
+  background:#eee;
+  border-radius:5px;
+  overflow:hidden;
+  margin-bottom:30px;
+}
+.progress-bar{
+  height:100%;
+  width:33%;
+  background:#243b55;
+  transition:0.4s;
+}
+
+/* Steps */
+.step{
+  display:none;
+  flex-direction:column;
+  gap:22px;
+}
+.step.active{ display:flex; }
+
+/* Floating Input */
+.input-group{
+  position:relative;
+}
+.input-group input,
+.input-group select,
+.input-group textarea{
+  width:100%;
+  padding:14px 12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+.input-group label{
+  position:absolute;
+  top:14px;
+  left:12px;
+  background:white;
+  padding:0 4px;
+  font-size:13px;
+  color:#666;
+  transition:0.3s;
+  pointer-events:none;
+}
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown)+label,
+.input-group textarea:focus + label,
+.input-group textarea:not(:placeholder-shown)+label{
+  top:-8px;
+  font-size:11px;
+  color:#243b55;
+}
+
+button{
+  padding:14px;
+  border:none;
+  border-radius:8px;
+  background:#243b55;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover{ background:#141e30; }
+
+.radio-group, .checkbox-group{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.counter{
+  font-size:12px;
+  text-align:right;
+  color:#666;
+}
+
+.strength{
+  font-size:12px;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .container{ flex-direction:column; }
+  .left{ text-align:center; padding:40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Left Branding -->
+  <div class="left">
+    <h1>Tantraz 2026</h1>
+    <p>Experience innovation like never before.  
+    Complete your onboarding and secure your participation in the most awaited tech fest.</p>
+  </div>
+
+  <!-- Right Form -->
+  <div class="right">
+
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- STEP 1: SIGN UP -->
+    <div class="step active" id="step1">
+      <h2>Create Account</h2>
+
+      <div class="input-group">
+        <input type="text" placeholder=" " required>
+        <label>Full Name *</label>
+      </div>
+
+      <div class="input-group">
+        <input type="email" placeholder=" " required>
+        <label>Email Address *</label>
+      </div>
+
+      <div class="input-group">
+        <input type="password" id="password" placeholder=" " required minlength="6">
+        <label>Password *</label>
+        <div class="strength" id="strength"></div>
+      </div>
+
+      <div class="input-group">
+        <input type="password" id="confirmPassword" placeholder=" " required>
+        <label>Confirm Password *</label>
+      </div>
+
+      <button onclick="nextStep()">Continue</button>
+    </div>
+
+    <!-- STEP 2: TANTRAZ -->
+    <div class="step" id="step2">
+      <h2>Event Registration</h2>
+
+      <div class="input-group">
+        <select required>
+          <option value="">Select Category *</option>
+          <option>Individual</option>
+          <option>Team</option>
+          <option>Audience</option>
+        </select>
+      </div>
+
+      <div>
+        <label>T-Shirt Size</label>
+        <div class="radio-group">
+          <label><input type="radio" name="size"> S</label>
+          <label><input type="radio" name="size"> M</label>
+          <label><input type="radio" name="size"> L</label>
+          <label><input type="radio" name="size"> XL</label>
+        </div>
+      </div>
+
+      <div>
+        <label>Technical Interests</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox"> AI</label>
+          <label><input type="checkbox"> Web Dev</label>
+          <label><input type="checkbox"> Cloud</label>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <textarea id="bio" maxlength="200" rows="3" placeholder=" "></textarea>
+        <label>Expectations (Max 200 characters)</label>
+        <div class="counter" id="counter">0 / 200</div>
+      </div>
+
+      <button onclick="nextStep()">Complete Registration</button>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step" id="step3">
+      <h2>🎉 Welcome to Tantraz!</h2>
+      <p>Your registration has been successfully completed.</p>
+      <button onclick="location.reload()">Start Over</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let current=1;
+function nextStep(){
+  if(current===1){
+    const p=document.getElementById("password").value;
+    const c=document.getElementById("confirmPassword").value;
+    if(p!==c){ alert("Passwords do not match"); return; }
+  }
+  document.getElementById("step"+current).classList.remove("active");
+  current++;
+  document.getElementById("step"+current).classList.add("active");
+  document.getElementById("progressBar").style.width=(current*33)+"%";
+}
+
+/* Password Strength */
+document.getElementById("password").addEventListener("input",function(){
+  const val=this.value;
+  const strength=document.getElementById("strength");
+  if(val.length<6){ strength.innerText="Weak"; strength.style.color="red";}
+  else if(val.length<10){ strength.innerText="Medium"; strength.style.color="orange";}
+  else{ strength.innerText="Strong"; strength.style.color="green";}
+});
+
+/* Character Counter */
+document.getElementById("bio").addEventListener("input",function(){
+  document.getElementById("counter").innerText=
+  this.value.length+" / 200";
+});
+</script>
+
+</body>
+</html>
